@@ -67,16 +67,19 @@ student-task-manager/
 - `README.md` – Contains project documentation and instructions.
 
 ## 👥 Team Members and Roles
+## 👩‍💻 Team Members
 
-| Team Member     | Role                               |
-| --------------- | ---------------------------------- |
-|                 | Team Leader / Project Coordination |
-| [Member 2 Name] | HTML Development                   |
-| [Member 3 Name] | CSS Design                         |
-| [Member 4 Name] | JavaScript Development             |
-| [Your Name]     | Project Documentation (README.md)  |
+## 👩‍💻 Team Members
 
-*Replace the placeholders with the actual names and assigned responsibilities of your team members.*
+1. Shaik Salma – Team Leader & Project Integration
+2. Faiza Thabasum – Task Completion Feature
+3. Shaik Fara Roshini – Task Statistics & Progress Tracking
+4. Shafiya Shaik – Delete Task Feature
+5. Sondi Vaishnavi – Project Documentation
+6. Nissy – Responsive Design
+7. Sheela Kumari – Task Priority Feature
+
+
 
 ## 🤝 GitHub Collaboration Workflow
 
