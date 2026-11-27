@@ -290,3 +290,28 @@ footer {
         flex-wrap: wrap;
     }
 }
+/* Task Priority Styles */
+
+.priority-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 900;
+    flex-shrink: 0;
+}
+
+.priority-high {
+    background-color: #ffe5e9;
+    color: #c74360;
+}
+
+.priority-medium {
+    background-color: #fff0d9;
+    color: #a66b16;
+}
+
+.priority-low {
+    background-color: #e3f5e9;
+    color: #398452;
+}
