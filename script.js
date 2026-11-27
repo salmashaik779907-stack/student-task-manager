@@ -26,7 +26,7 @@ function addTask() {
 
     const deleteButton = document.createElement("button");
     deleteButton.className = "delete-btn";
-    deleteButton.innerText = "Delete";
+    deleteButton.innerText = "🗑 Delete";
 
     deleteButton.onclick = function () {
         li.remove();
