@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate | Student Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="dashboard">
+
+        <nav class="navbar">
+            <div class="logo">✿ StudyMate</div>
+            <span class="nav-tag">MY STUDY SPACE</span>
+        </nav>
+
+        <section class="welcome">
+            <div>
+                <span class="eyebrow">YOUR PERSONAL PRODUCTIVITY SPACE ✨</span>
+                <h1>Little steps,<br>big achievements.</h1>
+                <p>Stay organized, stay focused and make every day count.</p>
+            </div>
+            <div class="welcome-art">📚</div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <span class="stat-icon">📝</span>
+                <p>Total Tasks</p>
+                <h2 id="totalTasks">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-icon">⏳</span>
+                <p>Pending</p>
+                <h2 id="pendingTasks">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-icon">🌸</span>
+                <p>Completed</p>
+                <h2 id="completedTasks">0</h2>
+            </div>
+        </section>
+
+        <section class="task-section">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">LET'S GET THINGS DONE</span>
+                    <h2>My Tasks <span>♡</span></h2>
+                </div>
+                <span class="today-tag">MY TO-DO LIST</span>
+            </div>
+
+            <div class="task-input">
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="What do you need to do today?"
+                >
+                <button onclick="addTask()">+ Add Task</button>
+            </div>
+
+            <p id="message"></p>
+
+            <ul id="taskList"></ul>
+
+            <div id="emptyState" class="empty-state">
+                <div>🌷</div>
+                <h3>Your space is waiting!</h3>
+                <p>Add your first task and make today productive.</p>
+            </div>
+        </section>
+
+        <footer>Made with ♡ for your study journey</footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
