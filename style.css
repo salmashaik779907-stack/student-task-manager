@@ -290,100 +290,28 @@ footer {
         flex-wrap: wrap;
     }
 }
+/* Task Priority Styles */
 
-/* Additional Responsive Design - Nissy */
-
-@media (max-width: 480px) {
-    body {
-        padding: 18px 12px;
-    }
-
-    .navbar {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .logo {
-        font-size: 21px;
-    }
-
-    .welcome {
-        padding: 22px 18px;
-        border-radius: 20px;
-    }
-
-    .welcome h1 {
-        font-size: 25px;
-    }
-
-    .welcome-art {
-        font-size: 42px;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .stat-card {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 15px;
-    }
-
-    .stat-card p {
-        margin: 0;
-    }
-
-    .stat-card h2 {
-        margin-left: auto;
-        font-size: 23px;
-    }
-
-    .task-section {
-        padding: 17px 13px;
-    }
-
-    .section-heading {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .section-heading h2 {
-        font-size: 22px;
-    }
-
-    #taskList li {
-        gap: 8px;
-        padding: 12px;
-    }
-
-    .task-text {
-        min-width: 100%;
-    }
-
-    .complete-btn,
-    .delete-btn {
-        flex: 1;
-        padding: 9px 8px;
-    }
+.priority-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 900;
+    flex-shrink: 0;
 }
 
-@media (min-width: 601px) and (max-width: 768px) {
-    body {
-        padding: 25px 18px;
-    }
+.priority-high {
+    background-color: #ffe5e9;
+    color: #c74360;
+}
 
-    .welcome {
-        padding: 28px;
-    }
+.priority-medium {
+    background-color: #fff0d9;
+    color: #a66b16;
+}
 
-    .stats {
-        gap: 12px;
-    }
-
-    .task-section {
-        padding: 24px;
-    }
+.priority-low {
+    background-color: #e3f5e9;
+    color: #398452;
 }

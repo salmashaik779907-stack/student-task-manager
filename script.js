@@ -58,24 +58,61 @@ function addTask() {
     const input = document.getElementById("taskInput");
     const message = document.getElementById("message");
     const task = input.value.trim();
+    const priority = document.getElementById("taskPriority").value;
 
     if (task === "") {
         message.innerText = "Please enter a task first! 🌸";
         return;
     }
 
-    tasks.push({
-        text: task,
-        completed: false
-    });
+    const li = document.createElement("li");
 
-    saveTasks();
-    renderTasks();
+    // Task text
+    const taskText = document.createElement("span");
+    taskText.className = "task-text";
+    taskText.innerText = task;
 
+    // Priority badge
+    const priorityBadge = document.createElement("span");
+    priorityBadge.className = "priority-badge priority-" + priority.toLowerCase();
+    priorityBadge.innerText = priority;
+
+    // Complete button
+    const completeButton = document.createElement("button");
+    completeButton.className = "complete-btn";
+    completeButton.innerText = "✓ Done";
+
+    completeButton.onclick = function () {
+        taskText.classList.toggle("completed");
+        updateStats();
+    };
+
+    // Delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "delete-btn";
+    deleteButton.innerText = "🗑 Delete";
+
+    deleteButton.onclick = function () {
+        li.remove();
+        updateStats();
+    };
+
+    // Add elements to task
+    li.appendChild(taskText);
+    li.appendChild(priorityBadge);
+    li.appendChild(completeButton);
+    li.appendChild(deleteButton);
+
+    document.getElementById("taskList").appendChild(li);
+
+    // Reset input
     input.value = "";
+    document.getElementById("taskPriority").value = "Medium";
+
     message.innerText = "Your task has been added! ✨";
 }
 
+// Update task statistics
 function updateStats() {
     const total = tasks.length;
     const completed = tasks.filter(task => task.completed).length;
@@ -89,10 +126,14 @@ function updateStats() {
         total === 0 ? "block" : "none";
 }
 
-document.getElementById("taskInput").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        addTask();
+// Press Enter to add task
+document.getElementById("taskInput").addEventListener(
+    "keypress",
+    function (event) {
+        if (event.key === "Enter") {
+            addTask();
+        }
     }
-});
+);
 
 renderTasks();
