@@ -1,9 +1,13 @@
-
 function getSavedTasks() {
-    return JSON.parse(localStorage.getItem("studyMateTasks")) || [];
+    try {
+        const savedTasks = JSON.parse(localStorage.getItem("studyMateTasks"));
+        return Array.isArray(savedTasks) ? savedTasks : [];
+    } catch (error) {
+        return [];
+    }
 }
 
-let tasks = getSavedTasks();
+let tasks = getSavedTasks().filter(task => task && typeof task.text === "string");
 
 function saveTasks() {
     localStorage.setItem("studyMateTasks", JSON.stringify(tasks));
@@ -13,22 +17,25 @@ function renderTasks() {
     const taskList = document.getElementById("taskList");
     taskList.innerHTML = "";
 
-    tasks.forEach(function(task, index) {
+    tasks.forEach(function (task, index) {
         const li = document.createElement("li");
 
         const taskText = document.createElement("span");
         taskText.className = "task-text";
         taskText.innerText = task.text;
+        taskText.classList.toggle("completed", Boolean(task.completed));
 
-        if (task.completed) {
-            taskText.classList.add("completed");
-        }
+        const priority = task.priority || "Medium";
+        const priorityBadge = document.createElement("span");
+        priorityBadge.className = "priority-badge priority-" + priority.toLowerCase();
+        priorityBadge.innerText = priority;
 
         const completeButton = document.createElement("button");
         completeButton.className = "complete-btn";
-        completeButton.innerText = task.completed ? "✓ Completed" : "✓ Done";
-
-        completeButton.onclick = function() {
+        completeButton.type = "button";
+        completeButton.innerText = task.completed ? "↩ Undo" : "✓ Complete";
+        completeButton.setAttribute("aria-pressed", String(Boolean(task.completed)));
+        completeButton.onclick = function () {
             tasks[index].completed = !tasks[index].completed;
             saveTasks();
             renderTasks();
@@ -36,18 +43,18 @@ function renderTasks() {
 
         const deleteButton = document.createElement("button");
         deleteButton.className = "delete-btn";
+        deleteButton.type = "button";
         deleteButton.innerText = "🗑 Delete";
-
-        deleteButton.onclick = function() {
+        deleteButton.onclick = function () {
             tasks.splice(index, 1);
             saveTasks();
             renderTasks();
         };
 
         li.appendChild(taskText);
+        li.appendChild(priorityBadge);
         li.appendChild(completeButton);
         li.appendChild(deleteButton);
-
         taskList.appendChild(li);
     });
 
@@ -57,62 +64,23 @@ function renderTasks() {
 function addTask() {
     const input = document.getElementById("taskInput");
     const message = document.getElementById("message");
-    const task = input.value.trim();
+    const text = input.value.trim();
     const priority = document.getElementById("taskPriority").value;
 
-    if (task === "") {
+    if (text === "") {
         message.innerText = "Please enter a task first! 🌸";
         return;
     }
 
-    const li = document.createElement("li");
+    tasks.push({ text, priority, completed: false });
+    saveTasks();
+    renderTasks();
 
-    // Task text
-    const taskText = document.createElement("span");
-    taskText.className = "task-text";
-    taskText.innerText = task;
-
-    // Priority badge
-    const priorityBadge = document.createElement("span");
-    priorityBadge.className = "priority-badge priority-" + priority.toLowerCase();
-    priorityBadge.innerText = priority;
-
-    // Complete button
-    const completeButton = document.createElement("button");
-    completeButton.className = "complete-btn";
-    completeButton.innerText = "✓ Done";
-
-    completeButton.onclick = function () {
-        taskText.classList.toggle("completed");
-        updateStats();
-    };
-
-    // Delete button
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "delete-btn";
-    deleteButton.innerText = "🗑 Delete";
-
-    deleteButton.onclick = function () {
-        li.remove();
-        updateStats();
-    };
-
-    // Add elements to task
-    li.appendChild(taskText);
-    li.appendChild(priorityBadge);
-    li.appendChild(completeButton);
-    li.appendChild(deleteButton);
-
-    document.getElementById("taskList").appendChild(li);
-
-    // Reset input
     input.value = "";
     document.getElementById("taskPriority").value = "Medium";
-
     message.innerText = "Your task has been added! ✨";
 }
 
-// Update task statistics
 function updateStats() {
     const total = tasks.length;
     const completed = tasks.filter(task => task.completed).length;
@@ -121,19 +89,15 @@ function updateStats() {
     document.getElementById("totalTasks").innerText = total;
     document.getElementById("completedTasks").innerText = completed;
     document.getElementById("pendingTasks").innerText = pending;
-
     document.getElementById("emptyState").style.display =
         total === 0 ? "block" : "none";
 }
 
-// Press Enter to add task
-document.getElementById("taskInput").addEventListener(
-    "keypress",
-    function (event) {
-        if (event.key === "Enter") {
-            addTask();
-        }
+document.getElementById("taskInput").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        addTask();
     }
-);
+});
 
 renderTasks();
